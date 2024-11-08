@@ -88,8 +88,12 @@ const QuizGameRoute = () => {
   }, [apiStatus, activeQuestionIndex])
 
   const renderLoadingView = () => (
-    <div data-testid="loader" className="loader">
-      <Loader type="ThreeDots" color="#0b69ff" height={50} width={50} />
+    <div className="quiz-page">
+      <div className="quiz-page-content">
+        <div data-testid="loader" className="loader">
+          <Loader type="ThreeDots" color="#0b69ff" height={50} width={50} />
+        </div>
+      </div>
     </div>
   )
 
@@ -334,6 +338,7 @@ const QuizGameRoute = () => {
 
   const renderViews = () => {
     switch (apiStatus) {
+      case apiStatusConstants.initial:
       case apiStatusConstants.inProgress:
         return renderLoadingView()
       case apiStatusConstants.success:
