@@ -74,12 +74,24 @@ const GameReportsRoute = () => {
   const CorrectAnswers = getCorrectAnswersCount()
   const IncorrectAnswers = getIncorrectQuestionsCount()
   const Unattempted = getUnattemptedQuestions().length
+  const ScorePercentage = ((CorrectAnswers / ttlQns) * 100).toFixed(2)
 
   return (
     <div className="page-container">
       <Header />
       <div className="report-container">
         <div className="score-board">
+          {ScorePercentage >= 60 ? (
+            <>
+              <h1>{ScorePercentage}% Correctly Answered</h1>
+              <p>Quiz completed successfully</p>
+            </>
+          ) : (
+            <h1>You lose</h1>
+          )}
+          <p>
+            You attempted {CorrectAnswers} out of {ttlQns} questions as correct
+          </p>
           <div className="score-container">
             <div className="score-circle">
               <p>

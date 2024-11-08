@@ -10,7 +10,7 @@ const QuizGameRoute = () => {
   const [activeQuestionIndex, setActiveQuestionIndex] = useState(0)
   const [selectedAnswerIndex, setSelectedAnswerIndex] = useState(-1)
   const [correctAnswersCount, setCorrectAnswersCount] = useState(0)
-  const [setQuizFinished] = useState(false)
+  const [quizFinished, setQuizFinished] = useState(false)
   const [timer, setTimer] = useState(15)
   const history = useHistory()
   const timerRef = useRef(null)
@@ -74,6 +74,7 @@ const QuizGameRoute = () => {
 
   useEffect(() => {
     fetchQuizQuestions()
+    // eslint-disable-next-line
   }, [])
 
   useEffect(() => {
@@ -83,6 +84,7 @@ const QuizGameRoute = () => {
     return () => {
       clearInterval(timerRef.current)
     }
+    // eslint-disable-next-line
   }, [apiStatus, activeQuestionIndex])
 
   const renderLoadingView = () => (
@@ -145,6 +147,11 @@ const QuizGameRoute = () => {
       setTimer(15)
     } else {
       setQuizFinished(true)
+    }
+  }
+
+  useEffect(() => {
+    if (quizFinished) {
       history.push({
         pathname: '/game-results',
         state: {
@@ -154,12 +161,13 @@ const QuizGameRoute = () => {
         },
       })
     }
-  }
+  }, [quizFinished, history, correctAnswersCount, quizQuestions])
 
   useEffect(() => {
     if (timer === 0 && selectedAnswerIndex === -1) {
       handleNextQuestion()
     }
+    // eslint-disable-next-line
   }, [timer])
 
   const renderQuiz = () => {
@@ -179,7 +187,7 @@ const QuizGameRoute = () => {
             const showIcon = isSelected || (isCorrect && slctOptId !== null)
             return (
               <li key={option.id} className={`option-container ${optionClass}`}>
-                <span>{`${String.fromCharCode(65 + index)}. `}</span>
+                {`${String.fromCharCode(65 + index)}. `}
                 <button
                   className={`option ${optionClass}`}
                   onClick={() => handleAnswerSelection(option.id)}
