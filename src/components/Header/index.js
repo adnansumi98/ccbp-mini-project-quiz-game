@@ -24,7 +24,7 @@ const Header = props => {
           <p className="logo-text">NXT Quiz</p>
         </div>
         <ul className="nav-items">
-          <li className="logout-btn-list-item-small">
+          <div className="logout-btn-list-item-small">
             <button
               type="button"
               className="logout-button-sm"
@@ -33,7 +33,7 @@ const Header = props => {
             >
               <FiLogOut className="logout-icon-sm" />
             </button>
-          </li>
+          </div>
         </ul>
         <button
           type="button"

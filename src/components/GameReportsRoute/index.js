@@ -1,9 +1,10 @@
-import {useLocation} from 'react-router-dom'
+import {useLocation, useHistory} from 'react-router-dom'
 import Header from '../Header'
 import './index.css'
 
 const GameReportsRoute = () => {
   const location = useLocation()
+  const history = useHistory()
   const {questions = [], ttlQns = 0} = location.state || {}
 
   const getUnattemptedQuestions = () =>
@@ -35,8 +36,8 @@ const GameReportsRoute = () => {
         {unattemptedQuestions.map(question => (
           <div key={question.id} className="question-container">
             <h3>{question.question}</h3>
-            <div className="options-wrapper">
-              <div className="options-container">
+            <ul className="options-wrapper">
+              <li className="options-container">
                 {question.options.map(option => (
                   <button
                     key={option.id}
@@ -63,8 +64,8 @@ const GameReportsRoute = () => {
                     )}
                   </button>
                 ))}
-              </div>
-            </div>
+              </li>
+            </ul>
           </div>
         ))}
       </div>
@@ -75,6 +76,10 @@ const GameReportsRoute = () => {
   const IncorrectAnswers = getIncorrectQuestionsCount()
   const Unattempted = getUnattemptedQuestions().length
   const ScorePercentage = ((CorrectAnswers / ttlQns) * 100).toFixed(2)
+
+  const handleReportButtonClick = () => {
+    history.push('/report') // Adjust this route to where the report page is located
+  }
 
   return (
     <div className="page-container">
@@ -92,6 +97,9 @@ const GameReportsRoute = () => {
           <p>
             You attempted {CorrectAnswers} out of {ttlQns} questions as correct
           </p>
+          <button type="button" onClick={handleReportButtonClick}>
+            Report
+          </button>
           <div className="score-container">
             <div className="score-circle">
               <p>

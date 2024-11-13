@@ -178,6 +178,18 @@ const QuizGameRoute = () => {
     const crntQn = quizQuestions[activeQuestionIndex]
     const {question, options, optionType, crctOptId, slctOptId} = crntQn
 
+    const renderIcons = isCorrect => (
+      <img
+        className="option-icon"
+        src={
+          isCorrect
+            ? 'https://assets.ccbp.in/frontend/react-js/quiz-game-check-circle-img.png'
+            : 'https://assets.ccbp.in/frontend/react-js/quiz-game-close-circle-img.png'
+        }
+        alt={isCorrect ? 'correct checked circle' : 'incorrect close circle'}
+      />
+    )
+
     const renderOptions = () => {
       switch (optionType) {
         case 'DEFAULT':
@@ -199,22 +211,8 @@ const QuizGameRoute = () => {
                   disabled={slctOptId !== null}
                 >
                   {option.text}
-                  {showIcon && (
-                    <img
-                      className="option-icon"
-                      src={
-                        isCorrect
-                          ? 'https://assets.ccbp.in/frontend/react-js/quiz-game-check-circle-img.png'
-                          : 'https://assets.ccbp.in/frontend/react-js/quiz-game-close-circle-img.png'
-                      }
-                      alt={
-                        isCorrect
-                          ? 'correct checked circle'
-                          : 'incorrect close circle'
-                      }
-                    />
-                  )}
                 </button>
+                {showIcon && <>{renderIcons(isCorrect)}</>}
               </li>
             )
           })
@@ -240,21 +238,7 @@ const QuizGameRoute = () => {
                     alt={option.text}
                     className="option-image"
                   />
-                  {showIcon && (
-                    <img
-                      className="option-icon"
-                      src={
-                        isCorrect
-                          ? 'https://assets.ccbp.in/frontend/react-js/quiz-game-check-circle-img.png'
-                          : 'https://assets.ccbp.in/frontend/react-js/quiz-game-close-circle-img.png'
-                      }
-                      alt={
-                        isCorrect
-                          ? 'correct checked circle'
-                          : 'incorrect close circle'
-                      }
-                    />
-                  )}
+                  {showIcon && <>{renderIcons(isCorrect)}</>}
                 </div>
               </li>
             )
@@ -277,21 +261,7 @@ const QuizGameRoute = () => {
                 />
                 <label htmlFor={option.id} className="single-select-label">
                   {option.text}
-                  {showIcon && (
-                    <img
-                      className="option-icon"
-                      src={
-                        isCorrect
-                          ? 'https://assets.ccbp.in/frontend/react-js/quiz-game-check-circle-img.png'
-                          : 'https://assets.ccbp.in/frontend/react-js/quiz-game-close-circle-img.png'
-                      }
-                      alt={
-                        isCorrect
-                          ? 'correct checked circle'
-                          : 'incorrect close circle'
-                      }
-                    />
-                  )}
+                  {showIcon && <>{renderIcons(isCorrect)}</>}
                 </label>
               </li>
             )

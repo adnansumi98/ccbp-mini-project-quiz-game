@@ -38,9 +38,9 @@ const GameResultRoute = () => {
                 className="won-image"
               />
               <h1 className="congrats-text">Congrats!!</h1>
-              <p className="percentage-text">
+              <h2 className="percentage-text">
                 {correctPercentage}% Correctly Answered
-              </p>
+              </h2>
               <p className="success-text">Quiz completed successfully</p>
               <p className="score-text">
                 You attempted {crctAns} out of {ttlQns} questions as correct
@@ -61,9 +61,9 @@ const GameResultRoute = () => {
                 className="lose-image"
               />
               <h1 className="congrats-text">You lose</h1>
-              <p className="percentage-text">
+              <h2 className="percentage-text">
                 {correctPercentage}% Correctly Answered
-              </p>
+              </h2>
               <p className="score-text">
                 You attempted {crctAns} out of {ttlQns} questions as correct
               </p>
